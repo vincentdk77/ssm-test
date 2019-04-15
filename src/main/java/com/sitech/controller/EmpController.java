@@ -27,7 +27,7 @@ public class EmpController {
 		List<Employee> list = new ArrayList<Employee>();
 		list = empService.getAll();
 		PageInfo<List<Employee>> pageInfo = new PageInfo(list,5);
-		System.out.println("查询成功");
+		System.out.println("查询成功！当前页面"+pageNo);
 		return pageInfo;
 	}
 }
