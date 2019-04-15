@@ -6,6 +6,8 @@
 	<!--驼峰命名-->
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 	<!--类型别名-->
 	<typeAliases>

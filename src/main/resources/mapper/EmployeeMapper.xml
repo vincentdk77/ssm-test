@@ -8,6 +8,17 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="d_id" jdbcType="INTEGER" property="dId" />
   </resultMap>
+  <resultMap id="BaseResultMapWithDept" type="com.sitech.bean.Employee">
+    <id column="emp_id" jdbcType="INTEGER" property="empId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="empName" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="d_id" jdbcType="INTEGER" property="dId" />
+    <association property="department" javaType="com.sitech.bean.Department">
+    	<id column="dept_id" property="deptId"/>
+    	<result column="dept_name" property="deptName"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,6 +80,24 @@
   <sql id="Base_Column_List">
     emp_id, emp_name, gender, email, d_id
   </sql>
+  <sql id="Base_Column_List_With_Dept">
+    emp_id, emp_name, gender, email, d_id, b.dept_name
+  </sql>
+  <select id="selectByExampleWithDept" parameterType="com.sitech.bean.EmployeeExample" resultMap="BaseResultMapWithDept">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List_With_Dept" />
+    from tbl_emp a left join tbl_dept b 
+    on a.`d_id`=b.`dept_id`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.sitech.bean.EmployeeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

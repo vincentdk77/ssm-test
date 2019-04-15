@@ -14,7 +14,7 @@ public class EmpSerive {
 	EmployeeMapper employeeMapper;
 	public List<Employee> getAll() {
 		
-		return employeeMapper.selectByExample(null);
+		return employeeMapper.selectByExampleWithDept(null);
 	}
 
 }
