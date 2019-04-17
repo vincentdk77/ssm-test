@@ -80,6 +80,17 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!-- resultType的值为  集合中的元素类型，而不是集合！！！ -->
+  <select id="selectDeptNameByExample" resultType="String" >
+    select distinct dept_name
+    from tbl_dept
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

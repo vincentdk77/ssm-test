@@ -90,7 +90,7 @@
     </if>
     <include refid="Base_Column_List_With_Dept" />
     from tbl_emp a left join tbl_dept b 
-    on a.`d_id`=b.`dept_id`
+    on a.d_id=b.dept_id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

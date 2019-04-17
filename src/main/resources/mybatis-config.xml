@@ -9,7 +9,7 @@
         <!-- 打印查询语句 -->
         <setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
-	<!--类型别名-->
+	<!--类型别名type-->
 	<typeAliases>
 		<package name="com.sitech.bean"/>
 	</typeAliases>

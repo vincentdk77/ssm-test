@@ -1,7 +1,8 @@
 /**
  * 
  */
-
+var currentPage;//当前页码
+var count;//记录数
 $(function(){
 		toPage(1);
 	});
@@ -63,6 +64,7 @@ $(function(){
 			"navigatepageNums":[1,2,3,4,5],"navigateFirstPage":1,"navigateLastPage":5,"lastPage":5,"firstPage":1}
 		*/
 		$("#records").html("当前第"+result.pageNum+"页，共"+result.pages+"页，共"+result.total+"条记录");
+		count = result.total;
 	}
 	
 	function processNavigator(result){
@@ -132,5 +134,48 @@ $(function(){
 			/* alert("next"); */
 			toPage(result.pageNum+1);
 		});
-		
 	}
+	
+	/*
+	 * 模态框的
+	 */
+	$(function(){
+		//新增按钮
+		$(".add").click(function(){
+			//添加department下拉框的数据填充
+			$.ajax({
+				url:$("#contextPath").val()+"/dept",
+				success:function(result){
+//					console.log(result);
+//					["开发部","测试部"]
+					//先清空数据再添加数据
+					$("select").empty();
+					$("select").append("<option></option>");
+					$.each(result,function(){
+						$("select").append("<option value='"+this.deptId+"'>"+this.deptName+"</option>");
+					});
+					
+				},
+				async:false
+			});
+			//模态框显示
+			$('.modal').modal("show");
+		});
+		
+		//新增   保存功能
+		$(".save").click(function(){
+			$.ajax({
+				url:$("#contextPath").val()+"/emp",
+				data: $(".addForm").serialize(),
+				type:"post",
+				success:function(result){
+					console.log(result);
+					//关闭模态框
+					$('.modal').modal('hide');
+					//页面定向到尾页
+					toPage(count);
+				},
+				async:false
+			});
+		});
+	});
