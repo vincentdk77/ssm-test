@@ -118,6 +118,12 @@
     from tbl_emp
     where emp_id = #{empId,jdbcType=INTEGER}
   </select>
+  <select id="selectByPrimaryKeyWithDept"  resultMap="BaseResultMapWithDept">
+    select 
+    *
+    from tbl_emp a left join tbl_dept b  on a.d_id = b.dept_id
+    where a.emp_id = #{empId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_emp
     where emp_id = #{empId,jdbcType=INTEGER}

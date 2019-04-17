@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +47,7 @@ public class EmpController {
 	 */
 	@RequestMapping(value="/dept",method=RequestMethod.GET)
 	@ResponseBody
-	public List<Department> getDepartment(){
+	public List<Department> getDepartments(){
 //		SELECT DISTINCT dept_name FROM tbl_dept;
 		return deptService.findAllDeptNames();
 	}
@@ -59,5 +60,22 @@ public class EmpController {
 	public int save(Employee employee) {
 		System.err.println(employee);
 		return empService.save(employee);
+	}
+	
+	/**
+	 * 根据员工id查询员工信息
+	 */
+	@RequestMapping(value="/emp/{empId}",method=RequestMethod.GET)
+	@ResponseBody
+	public Employee getEmp(@PathVariable(value="empId") Integer empId){
+		System.err.println("empId="+empId);
+		return empService.selectByPrimaryKeyWithDept(empId);
+	}
+	
+	@RequestMapping(value="/emp",method=RequestMethod.PUT)
+	@ResponseBody
+	public int updateByPrimaryKey(Employee employee) {
+		System.err.println(employee);
+		return empService.updateByPrimaryKey(employee);
 	}
 }

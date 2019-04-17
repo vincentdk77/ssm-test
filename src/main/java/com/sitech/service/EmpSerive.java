@@ -20,5 +20,13 @@ public class EmpSerive {
 		// TODO Auto-generated method stub
 		return employeeMapper.insert(employee);
 	}
+	public Employee selectByPrimaryKeyWithDept(Integer empId) {
+		// TODO Auto-generated method stub
+		return employeeMapper.selectByPrimaryKeyWithDept(empId);
+	}
+	public int updateByPrimaryKey(Employee employee) {
+		// TODO Auto-generated method stub
+		return employeeMapper.updateByPrimaryKey(employee);
+	}
 
 }

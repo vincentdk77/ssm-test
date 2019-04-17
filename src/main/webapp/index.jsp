@@ -55,7 +55,7 @@
 		</div>
 		
 		<!-- 员工添加 模态框 -->
-		<div class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal fade addModal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -80,10 +80,10 @@
 					  		<label for="inputradio3" class="col-sm-2 control-label">gender</label>
 						    <div class="col-sm-10">
 							    <label class="radio-inline ">
-								  <input type="radio" name="gender" id="man" value="男" checked>男
+								  <input type="radio" name="gender" id="man" value="M" checked>男
 								</label>
 								<label class="radio-inline">
-								  <input type="radio" name="gender" id="women" value="女">女
+								  <input type="radio" name="gender" id="women" value="W">女
 								</label>
 						    </div>
 					  </div>
@@ -91,6 +91,57 @@
 					  	<label for="inputdepartment3" class="col-sm-2 control-label">department</label>
 					    <div class="col-sm-4">
 					      <select class="form-control" name="dId">
+					      
+						  </select>
+					    </div>
+					  </div>
+					</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="button" class="btn btn-primary save">保存</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- 员工编辑 模态框 -->
+		<div class="modal fade editModal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">员工修改</h4>
+		      </div>
+		      <div class="modal-body">
+					<form class="form-horizontal editForm">
+					  <div class="form-group">
+					    <label for="inputlastName3" class="col-sm-2 control-label">lastName</label>
+					    <div class="col-sm-10">
+					      <input type="lastName" name="empName" class="form-control lastName" id="lastName3" placeholder="LastName">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label">email</label>
+					    <div class="col-sm-10">
+					      <input type="email" name="email" class="form-control email" id="inputEmail3" placeholder="Email">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					  		<label for="inputradio3" class="col-sm-2 control-label">gender</label>
+						    <div class="col-sm-10">
+							    <label class="radio-inline ">
+								  <input type="radio" name="gender" id="man" value="M" checked>男
+								</label>
+								<label class="radio-inline">
+								  <input type="radio" name="gender" id="women" value="W">女
+								</label>
+						    </div>
+					  </div>
+					  <div class="form-group">
+					  	<label for="inputdepartment3" class="col-sm-2 control-label">department</label>
+					    <div class="col-sm-4">
+					      <select class="form-control dId" name="dId">
 					      
 						  </select>
 					    </div>
