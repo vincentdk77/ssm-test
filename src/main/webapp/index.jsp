@@ -23,7 +23,8 @@
 		<div class="row">
 		  <div class="col-md-2 col-md-offset-8">
 		  	<button type="button" class='btn btn-primary add'>新增</button>
-		  	<button type="button" class='btn btn-danger delete'>删除</button>
+		  	<!-- <button type="button" class='btn btn-danger delete'>删除</button> -->
+		  	<button type="button" class="btn btn-danger deleteSelected">删除</button>
 		  </div>
 		</div>
 		<div class="row">
@@ -31,7 +32,7 @@
 				  <thead>
 				  	<tr>
 				  		  <th class="col-md-1">
-					  	     <input type="checkbox"/> 
+					  	     <input type="checkbox" class="selectAll"/> 
 						  </th>
 						  <th class="col-md-1">#</th>
 						  <th class="col-md-2">lastName</th>
@@ -156,6 +157,41 @@
 		  </div>
 		</div>
 		
+		<!-- 删除模态框-->
+		<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">员工删除</h4>
+		      </div>
+		      <div class="modal-body" id="message">
+		       	
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary deleteFirm">确认</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		      </div>
+		    </div>
+		  </div>
+		</div> -->
+		<div class="modal fade deleteModal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">员工删除</h4>
+		      </div>
+		      <div class="modal-body" id="message">
+		      	
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary deleteConfirm">确定</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 </body>
 

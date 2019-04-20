@@ -1,6 +1,7 @@
 package com.sitech.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sitech.bean.Department;
 import com.sitech.bean.Employee;
+import com.sitech.bean.EmployeeExample;
+import com.sitech.bean.EmployeeExample.Criteria;
 import com.sitech.service.DeptService;
 import com.sitech.service.EmpSerive;
 
@@ -36,6 +39,7 @@ public class EmpController {
 		PageHelper.startPage(pageNo, 5);
 		List<Employee> list = new ArrayList<Employee>();
 		list = empService.getAll();
+		//连续显示几页
 		PageInfo<List<Employee>> pageInfo = new PageInfo(list,5);
 		System.out.println("查询成功！当前页面"+pageNo);
 		return pageInfo;
@@ -71,11 +75,35 @@ public class EmpController {
 		System.err.println("empId="+empId);
 		return empService.selectByPrimaryKeyWithDept(empId);
 	}
-	
+	/**
+	 * 员工信息更新
+	 */
 	@RequestMapping(value="/emp",method=RequestMethod.PUT)
 	@ResponseBody
 	public int updateByPrimaryKey(Employee employee) {
 		System.err.println(employee);
 		return empService.updateByPrimaryKey(employee);
+	}
+	/**
+	 * 单个删除、批量删除功能
+	 */
+	@RequestMapping(value="/emp",method=RequestMethod.DELETE)
+	@ResponseBody
+	public int deleteByPrimaryKey(String empId) {
+		int count=0;
+		System.err.println("empId=="+empId);
+		String[] idArr = empId.split("-");
+		List<Integer> list = new ArrayList<>();
+		if(idArr.length>1) {
+			for(String id:idArr) {
+				list.add(Integer.parseInt(id));
+			}
+			EmployeeExample ee = new EmployeeExample();
+			ee.createCriteria().andEmpIdIn(list);
+			count = empService.deleteBatch(ee);
+		}else if(idArr.length ==1) {
+			count = empService.deleteByPrimaryKey(Integer.parseInt(empId));
+		}
+		return count;
 	}
 }

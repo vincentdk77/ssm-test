@@ -35,10 +35,10 @@ $(function(){
 		$.each(result.list,function(){
 			var tr = 		"<tr>                                                                           "+
 							"  <td class='col-md-1'>                                                 "+
-							"     <input type='checkbox'/>                                           "+
+							"     <input type='checkbox' class='checkboxItem'/>                                           "+
 							"  </td>                                                                   "+
 							"  <td class='col-md-1 empId'>"+this.empId+"</td>                                    "+
-							"  <td class='col-md-2'>"+this.empName+"</td>                                  "+
+							"  <td class='col-md-2 empName'>"+this.empName+"</td>                                  "+
 							"  <td class='col-md-2'>"+this.email+"</td>                                    "+
 							"  <td class='col-md-1'>"+(this.gender=='M'?'男':'女')+"</td>                        "+
 							"  <td class='col-md-2'>"+this.department.deptName+"</td>                                    "+
@@ -53,6 +53,7 @@ $(function(){
 							"		</button>                                                              "+
 							" </td>                                                                    "+
 							"</tr>																		";
+//			<button type="button" class="btn btn-danger delete" data-toggle="modal" data-target="#myModal">删除</button>
 			$("tbody").append(tr);
 		});
 		
@@ -232,4 +233,59 @@ $(function(){
 			},
 			async:false
 		});
+	});
+	
+	//删除功能
+	$(document).on("click",".deleteItem",function(){//删除单个
+		//根据id查询emp数据
+		var empId = $(this).parent().parent().find(".empId").text();
+		var empName = $(this).parent().parent().find(".empName").text();
+		$("#message").empty();
+		$("#message").html("将要删除【"+empName+"】，确认吗？");
+		$(".deleteConfirm").attr("empId",empId);
+		$(".deleteModal").modal("show");
+	});
+	//确认删除
+	$(".deleteConfirm").click(function(){
+		$.ajax({
+			url:$("#contextPath").val()+"/emp?empId="+$(this).attr("empid")+"&_method=DELETE",
+			type:'POST',
+			success:function(result){
+				$(".deleteModal").modal("hide");
+//				alert("删除成功!");
+				toPage(currentPage);
+			},
+			async:false
+		});
+	});
+	//全选复选框
+	$(".selectAll").click(function(){
+		if(this.checked==true){
+			$.each($(".checkboxItem"),function(){
+				this.checked = true;
+			});
+		}else{
+			$.each($(".checkboxItem"),function(){
+				this.checked = false;
+			});
+		}
+//		$(".check_item").prop("checked",$(this).prop("checked"));
+	});
+	//复选框的单击事件
+	$(".deleteSelected").click(function(){//删除选中的多个员工
+		var name = "" ;
+		var id="";
+		$.each($(".checkboxItem"),function(){
+			if(this.checked==true){
+				var empId = $(this).parent().parent().find(".empId").text();
+				var empName = $(this).parent().parent().find(".empName").text();
+				$("#message").empty();
+				name += empName+"-" 
+				id += empId+"-" 
+			}
+		});
+		name = name.substring(0,name.length-1);
+		$("#message").html("将要删除【"+name+"】，确认吗？");
+		$(".deleteConfirm").attr("empId",id);
+		$(".deleteModal").modal("show");
 	});
